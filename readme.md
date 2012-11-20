@@ -1,4 +1,4 @@
-Less for Jekyll
+Sass for Jekyll
 ===============
 
 This gem provides a [Jekyll](http://github.com/mojombo/jekyll) converter for
@@ -10,31 +10,39 @@ Install the gem:
 
 	[sudo] gem install jekyll-sass
 
-In a plugin file within your Jekyll project's _plugins directory:
+In a plugin file within your Jekyll project's `_plugins` directory:
 
 	# _plugins/my-plugin.rb
 	require "jekyll-sass"
 
 Place .scss files anywhere in your Jekyll project's directory.  These will be
 converted to .css files with the same directory path and filename. For example,
-if you create a Less file at _css/my-stuff/styles.scss, then the corresponding
-css file would end up at _css/my-stuff/styles.css_.
+if you create a Less file at `css/my-stuff/styles.scss`, then the corresponding
+css file would end up at `css/my-stuff/styles.css`.
 
 Bundler Setup
 -------------
-Already using bundler to manage gems for your Jekyll project?  Then just add
+Using bundler to manage gems for your Jekyll project? Just add
 
 	gem "jekyll-sass"
 
-to your gemfile and create the following plugin in your projects _plugins
-directory.  I've called mine bundler.rb.  This will automatically require all
-of the gems specified in your Gemfile.
+to your gemfile and create the following plugin in your projects `_plugins`
+directory.  This will automatically require all of the gems specified in your Gemfile.
 
 	# _plugins/bundler.rb
 	require "rubygems"
 	require "bundler/setup"
 	Bundler.require(:default)
 
+Configuration
+-------------
+In your `_config.yml`
+
+	# defaults
+	sass:
+	    syntax: scss        # scss|sass
+	    style:  compressed  # nested|expanded|compact|compressed
+
 Credit
 ------
-This gem is based on [Roger López's](https://github.com/zroger) [jekyll-less](https://github.com/zroger/jekyll-less).
+This gem is based on [Roger López's](https://github.com/zroger) [jekyll-less](https://github.com/zroger/jekyll-less), with contributions from [Joe Buszkiewic](https://github.com/zznq).
