@@ -6,9 +6,9 @@ module Jekyll
 
     class SassConfig
       def self.generate()
-        config = Hash["style", :compressed, "syntax", :scss]
+        config = Hash["style", :compressed, "syntax", :scss, "cache", true]
         if Jekyll.configuration({}).has_key?('sass')
-          config.merge!(Jekyll.configuration({})['sass']) {|key,v1,v2| v2.to_sym}
+          config.merge!(Jekyll.configuration({})['sass']) {|key,v1,v2| (v2.is_a?(String) ? v2.to_sym : v2)}
         end
         config
       end
@@ -43,7 +43,7 @@ module Jekyll
         FileUtils.mkdir_p(File.dirname(dest_path))
         begin
           content = File.read(path)
-          engine = ::Sass::Engine.new( content, :syntax => config['syntax'], :load_paths => ["#{@site.source}#{@dir}"], :style => config['style'] )
+          engine = ::Sass::Engine.new( content, :syntax => config['syntax'], :load_paths => ["#{@site.source}#{@dir}"], :style => config['style'], :cache => config['cache'] )
           content = engine.render
           File.open(dest_path, 'w') do |f|
             f.write(content)
