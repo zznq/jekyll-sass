@@ -5,12 +5,16 @@ module Jekyll
     require 'sass'
 
     class SassConfig
-      def self.get()
+      def self.generate()
         config = Hash["style", :compressed, "syntax", :scss]
         if Jekyll.configuration({}).has_key?('sass')
           config.merge!(Jekyll.configuration({})['sass']) {|key,v1,v2| v2.to_sym}
         end
         config
+      end
+
+      def self.get()
+        @config ||= generate()
       end
     end
 
